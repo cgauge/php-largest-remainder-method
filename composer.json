@@ -1,0 +1,29 @@
+{
+  "name": "customergauge/remainder",
+  "description": "Largest Remainder Method calculation",
+  "type": "library",
+  "license": "MIT",
+  "keywords": ["largest", "remainder", "method", "Hare–Niemeyer", "Hamilton", "Vinton"],
+  "authors": [
+    {
+      "name": "Marco Deleu",
+      "email": "deleugyn@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "CustomerGauge\\Math\\Remainder\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\CustomerGauge\\Math\\Remainder\\": "tests/"
+    }
+  }
+}
