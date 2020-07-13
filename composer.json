@@ -3,7 +3,7 @@
   "description": "Largest Remainder Method calculation",
   "type": "library",
   "license": "MIT",
-  "keywords": ["largest", "remainder", "method", "Hare–Niemeyer", "Hamilton", "Vinton"],
+  "keywords": ["largest", "remainder", "method", "Hare", "Niemeyer", "Hamilton", "Vinton"],
   "authors": [
     {
       "name": "Marco Deleu",
