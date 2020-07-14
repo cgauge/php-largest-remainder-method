@@ -13,7 +13,7 @@ class RemainderTest extends TestCase
 
         $result = $remainder->round(4);
 
-        self::assertSame([1, 0, 0], $result);
+        self::assertEquals([1, 0, 0], $result);
     }
 
     public function test_division_with_two_numbers()
@@ -22,7 +22,7 @@ class RemainderTest extends TestCase
 
         $result = $remainder->round(4);
 
-        self::assertSame([0.5, 0.5, 0], $result);
+        self::assertEquals([0.5, 0.5, 0], $result);
     }
 
     public function test_array_order_is_kept()
@@ -31,7 +31,7 @@ class RemainderTest extends TestCase
 
         $result = $remainder->round(4);
 
-        self::assertSame([0, 0.5, 0.5], $result);
+        self::assertEquals([0, 0.5, 0.5], $result);
     }
 
     public function test_basic_remainder_decision()
@@ -54,5 +54,23 @@ class RemainderTest extends TestCase
             0.3684, // 0.36842105263157894736842105263158
             0.4211 // 0.42105263157894736842105263157895
         ], $result);
+    }
+
+    public function test_null_values_will_always_return_null()
+    {
+        $remainder = new Remainder([null, null, null]);
+
+        $result = $remainder->round(4);
+
+        self::assertSame([null, null, null], $result);
+    }
+
+    public function test_null_will_not_receive_increment()
+    {
+        $remainder = new Remainder([null, 1, 1, 1]);
+
+        $result = $remainder->round(4);
+
+        self::assertSame([null, 0.3334, 0.3333, 0.3333], $result);
     }
 }

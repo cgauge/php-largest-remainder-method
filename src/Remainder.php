@@ -2,6 +2,8 @@
 
 namespace CustomerGauge\Math\Remainder;
 
+use CustomerGauge\Math\Remainder\Definition\NumberFactory;
+
 final class Remainder
 {
     private $numbers;
@@ -24,7 +26,7 @@ final class Remainder
         $decimals = [];
 
         foreach ($this->numbers as $key => $number) {
-            $numberObject = new Number($key, $number, $this->sum, $precision);
+            $numberObject = NumberFactory::make($key, $number, $this->sum, $precision);
 
             $numbers[$key] = $numberObject;
 
@@ -34,21 +36,34 @@ final class Remainder
         }
 
         usort($decimals, function (Decimal $a, Decimal $b) {
-            return $b->value() <=> $a->value();
+            if ($b->value() > $a->value()) {
+                return 1;
+            }
+
+            // If both values are equal, let's try to preserve the exact same order of their original keys.
+            if ($a->value() == $b->value()) {
+                return $a->key() > $b->key();
+            }
+
+            return -1;
         });
 
-        $remaining = $precision - $this->accumulatedSumWithoutDecimals;
+        if ($this->accumulatedSumWithoutDecimals) {
+            $remaining = $precision - $this->accumulatedSumWithoutDecimals;
+        } else {
+            $remaining = 0;
+        }
 
         for ($i = 0; $i < $remaining; $i++) {
             $key = $decimals[$i]->key();
 
-            $numbers[$key]->increase();
+            $numbers[$key]->increment();
         }
 
         $result = [];
 
         foreach ($numbers as $key => $number) {
-            $result[$key] = $number->integer() / $precision;
+            $result[$key] = $number->value();
         }
 
         return $result;
