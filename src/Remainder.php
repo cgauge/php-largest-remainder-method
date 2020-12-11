@@ -42,7 +42,7 @@ final class Remainder
 
             // If both values are equal, let's try to preserve the exact same order of their original keys.
             if ($a->value() == $b->value()) {
-                return $a->key() > $b->key();
+                return 0;
             }
 
             return -1;
